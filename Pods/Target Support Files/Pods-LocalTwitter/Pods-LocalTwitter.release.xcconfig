@@ -1,0 +1,7 @@
+FRAMEWORK_SEARCH_PATHS = "$(PODS_ROOT)/Google-Maps-iOS-SDK" "$(PODS_ROOT)/Google-Maps-iOS-SDK"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/Google-Maps-iOS-SDK" "${PODS_ROOT}/Headers/Public/STTwitter"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/AFNetworking" -isystem "${PODS_ROOT}/Headers/Public/Google-Maps-iOS-SDK" -isystem "${PODS_ROOT}/Headers/Public/STTwitter"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"Pods-LocalTwitter-AFNetworking" -l"Pods-LocalTwitter-STTwitter" -l"c++" -l"icucore" -l"z" -framework "AVFoundation" -framework "Accounts" -framework "CoreData" -framework "CoreGraphics" -framework "CoreLocation" -framework "CoreText" -framework "Foundation" -framework "GLKit" -framework "GoogleMaps" -framework "ImageIO" -framework "MobileCoreServices" -framework "OpenGLES" -framework "QuartzCore" -framework "Security" -framework "SystemConfiguration" -framework "Twitter" -framework "UIKit" -weak_framework "Social"
+OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
+PODS_ROOT = ${SRCROOT}/Pods
