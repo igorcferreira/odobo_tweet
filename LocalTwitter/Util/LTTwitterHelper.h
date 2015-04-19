@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class CLLocation;
+
 @interface LTTwitterHelper : NSObject
+
++(void)start;
++(instancetype)sharedInstance;
+-(void)fetchTweetsOnLocation:(CLLocation*)location
+                    complete:(void(^)(NSArray* tweets))completeBlock
+                       error:(void(^)(NSError* error))errorBlock;
 
 @end

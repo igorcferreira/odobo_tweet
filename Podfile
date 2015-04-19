@@ -5,6 +5,7 @@ target 'LocalTwitter' do
     pod 'Google-Maps-iOS-SDK'
     pod 'AFNetworking'
     pod 'STTwitter'
+    pod 'RNActivityView'
 end
 
 target 'LocalTwitterTests' do

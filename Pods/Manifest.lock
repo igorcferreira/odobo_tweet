@@ -21,16 +21,19 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Google-Maps-iOS-SDK (1.9.2)
+  - RNActivityView (0.0.6)
   - STTwitter (0.2.0)
 
 DEPENDENCIES:
   - AFNetworking
   - Google-Maps-iOS-SDK
+  - RNActivityView
   - STTwitter
 
 SPEC CHECKSUMS:
   AFNetworking: fefbce9660acb17f48ae0011292d4da0f457bf36
   Google-Maps-iOS-SDK: 4c008abdb68e03ae125c7f674be841d369e2b3de
+  RNActivityView: 889126dc047fc6fa10aac88a13ebff677c53bf82
   STTwitter: 4fda61d0a96c707f94df85677b1a4aedbcec6fcd
 
 COCOAPODS: 0.36.3

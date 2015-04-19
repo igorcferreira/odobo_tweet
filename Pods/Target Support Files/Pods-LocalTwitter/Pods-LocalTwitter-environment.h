@@ -54,6 +54,12 @@
 #define COCOAPODS_VERSION_MINOR_Google_Maps_iOS_SDK 9
 #define COCOAPODS_VERSION_PATCH_Google_Maps_iOS_SDK 2
 
+// RNActivityView
+#define COCOAPODS_POD_AVAILABLE_RNActivityView
+#define COCOAPODS_VERSION_MAJOR_RNActivityView 0
+#define COCOAPODS_VERSION_MINOR_RNActivityView 0
+#define COCOAPODS_VERSION_PATCH_RNActivityView 6
+
 // STTwitter
 #define COCOAPODS_POD_AVAILABLE_STTwitter
 #define COCOAPODS_VERSION_MAJOR_STTwitter 0

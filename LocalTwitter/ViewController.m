@@ -7,8 +7,12 @@
 //
 
 #import "ViewController.h"
+#import "LTTwitterHelper.h"
+#import "LTLocationManager.h"
 
-@interface ViewController ()
+@interface ViewController()
+
+@property (nonatomic, strong) LTLocationManager* locationManager;
 
 @end
 
@@ -16,7 +20,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    [LTTwitterHelper start];
+    [self startLocationManager];
+}
+
+-(void)dealloc {
+    [LTLocationManager unRegisterObserver:self forStatus:kLTLocationManagerStatusError];
+    [LTLocationManager unRegisterObserver:self forStatus:kLTLocationManagerStatusUpdated];
+}
+
+- (void)startLocationManager {
+    [LTLocationManager registerObserver:self selector:@selector(locationUpdated:) forStatus:kLTLocationManagerStatusUpdated];
+    [LTLocationManager registerObserver:self selector:@selector(locationError:) forStatus:kLTLocationManagerStatusError];
+    
+    self.locationManager = [[LTLocationManager alloc] init];
+    [self.locationManager start];
+}
+
+-(void)locationUpdated:(NSNotification*)notification
+{
+    [self.locationManager stop];
+    [[LTTwitterHelper sharedInstance] fetchTweetsOnLocation:self.locationManager.lastLocation complete:^(NSArray *tweets) {
+        NSLog(@"%@",tweets);
+    } error:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+-(void)locationError:(NSNotification*)notification
+{
+    
 }
 
 - (void)didReceiveMemoryWarning {
