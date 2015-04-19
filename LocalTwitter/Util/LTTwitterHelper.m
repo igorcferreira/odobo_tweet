@@ -11,7 +11,9 @@
 #import <STTwitterAPI.h>
 #import <TwitterKit/TwitterKit.h>
 #import <CoreLocation/CoreLocation.h>
-#import "LTTweetResume.h"
+#import <Twitter/Twitter.h>
+#import <TwitterKit/TwitterKit.h>
+#import "TWTRGeoTweet.h"
 
 @interface LTTwitterHelper()
 
@@ -96,16 +98,38 @@
                                      successBlock:^(NSDictionary *searchMetadata, NSArray *statuses) {
                                          NSMutableArray* ids = [[NSMutableArray alloc] initWithCapacity:statuses.count];
                                          
+                                         __block NSMutableDictionary* elements = [[NSMutableDictionary alloc] init];
+                                         
                                          for(NSDictionary* status in statuses) {
-                                             LTTweetResume* resume = [[LTTweetResume alloc] initWithDictionary:status];
-                                             if(resume.location) {
-                                                 [ids addObject:resume];
+                                             NSString* element = [NSString stringWithFormat:@"%@",[status objectForKey:@"id"]];
+                                             CLLocation* location = [self locationForStatus:status];
+                                             if(location) {
+                                                 [ids addObject:element];
+                                                 [elements setObject:location forKey:element];
                                              }
                                          }
                                          
-                                         if(completeBlock) {
-                                             completeBlock(ids);
-                                         }
+                                         [[[Twitter sharedInstance] APIClient] loadTweetsWithIDs:ids completion:^(NSArray *tweets, NSError *error) {
+                                             if(error) {
+                                                 if(errorBlock) {
+                                                     errorBlock(error);
+                                                 }
+                                                 return;
+                                             }
+                                             
+                                             if([tweets count]) {
+                                                 NSMutableArray* geoTweets = [[NSMutableArray alloc] initWithCapacity:tweets.count];
+                                                 for(TWTRTweet *tweet in tweets) {
+                                                     TWTRGeoTweet *geo = [[TWTRGeoTweet alloc] initGeoTweetWithTweet:tweet andLocation:elements[tweet.tweetID]];
+                                                     [geoTweets addObject:geo];
+                                                 }
+                                                 
+                                                 if(completeBlock) {
+                                                     completeBlock([NSArray arrayWithArray:geoTweets]);
+                                                 }
+                                             }
+                                             
+                                         }];
                                      }
                                        errorBlock:^(NSError *error) {
                                            if(errorBlock) {
@@ -117,6 +141,18 @@
             errorBlock(error);
         }
     }];
+}
+
+-(CLLocation*)locationForStatus:(NSDictionary*)status
+{
+    id temp = status[@"geo"];
+    if(temp && [temp isKindOfClass:[NSDictionary class]]) {
+        temp = temp[@"coordinates"];
+        if(temp && [temp isKindOfClass:[NSArray class]]) {
+            return [[CLLocation alloc] initWithLatitude:[temp[0] doubleValue] longitude:[temp[1] doubleValue]];
+        }
+    }
+    return nil;
 }
 
 @end

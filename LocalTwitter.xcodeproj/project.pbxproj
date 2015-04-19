@@ -14,7 +14,7 @@
 		E20504851AE40C7700F40798 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E20504831AE40C7700F40798 /* TwitterKitResources.bundle */; };
 		E205048A1AE40DE900F40798 /* LTTwitterHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E20504891AE40DE900F40798 /* LTTwitterHelper.m */; };
 		E205048E1AE412D200F40798 /* LTLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E205048D1AE412D200F40798 /* LTLocationManager.m */; };
-		E20504921AE4256700F40798 /* LTTweetResume.m in Sources */ = {isa = PBXBuildFile; fileRef = E20504911AE4256700F40798 /* LTTweetResume.m */; };
+		E20504951AE42A9500F40798 /* TWTRGeoTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = E20504941AE42A9500F40798 /* TWTRGeoTweet.m */; };
 		E2E648901AE4079300960B14 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E6488F1AE4079300960B14 /* main.m */; };
 		E2E648931AE4079300960B14 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E648921AE4079300960B14 /* AppDelegate.m */; };
 		E2E648961AE4079300960B14 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E648951AE4079300960B14 /* ViewController.m */; };
@@ -46,8 +46,8 @@
 		E20504891AE40DE900F40798 /* LTTwitterHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LTTwitterHelper.m; path = Util/LTTwitterHelper.m; sourceTree = "<group>"; };
 		E205048C1AE412D200F40798 /* LTLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LTLocationManager.h; path = Helper/LTLocationManager.h; sourceTree = "<group>"; };
 		E205048D1AE412D200F40798 /* LTLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LTLocationManager.m; path = Helper/LTLocationManager.m; sourceTree = "<group>"; };
-		E20504901AE4256700F40798 /* LTTweetResume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LTTweetResume.h; path = Model/LTTweetResume.h; sourceTree = "<group>"; };
-		E20504911AE4256700F40798 /* LTTweetResume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LTTweetResume.m; path = Model/LTTweetResume.m; sourceTree = "<group>"; };
+		E20504931AE42A9500F40798 /* TWTRGeoTweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TWTRGeoTweet.h; path = Model/TWTRGeoTweet.h; sourceTree = "<group>"; };
+		E20504941AE42A9500F40798 /* TWTRGeoTweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TWTRGeoTweet.m; path = Model/TWTRGeoTweet.m; sourceTree = "<group>"; };
 		E2E6488A1AE4079300960B14 /* LocalTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E6488E1AE4079300960B14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2E6488F1AE4079300960B14 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -129,8 +129,8 @@
 		E205048F1AE4254800F40798 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E20504901AE4256700F40798 /* LTTweetResume.h */,
-				E20504911AE4256700F40798 /* LTTweetResume.m */,
+				E20504931AE42A9500F40798 /* TWTRGeoTweet.h */,
+				E20504941AE42A9500F40798 /* TWTRGeoTweet.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -353,7 +353,7 @@
 				E2E648931AE4079300960B14 /* AppDelegate.m in Sources */,
 				E2E648901AE4079300960B14 /* main.m in Sources */,
 				E205048E1AE412D200F40798 /* LTLocationManager.m in Sources */,
-				E20504921AE4256700F40798 /* LTTweetResume.m in Sources */,
+				E20504951AE42A9500F40798 /* TWTRGeoTweet.m in Sources */,
 				E205048A1AE40DE900F40798 /* LTTwitterHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

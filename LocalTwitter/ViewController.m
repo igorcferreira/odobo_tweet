@@ -11,11 +11,14 @@
 #import "LTLocationManager.h"
 #import "Constants.h"
 #import <GoogleMaps.h>
+#import <TwitterKit/TwitterKit.h>
+#import "TWTRGeoTweet.h"
 
-@interface ViewController()
+@interface ViewController()<GMSMapViewDelegate>
 
 @property (nonatomic, strong) LTLocationManager* locationManager;
 @property (nonatomic, strong) GMSMapView* mapView;
+@property (nonatomic, strong) NSArray* tweetResume;
 
 @end
 
@@ -37,7 +40,7 @@
     if(self.mapView == nil) {
         [GMSServices provideAPIKey:kGoogleAPI];
         self.mapView = [GMSMapView mapWithFrame:CGRectZero camera:[GMSCameraPosition cameraWithLatitude:0.0 longitude:0.0 zoom:14]];
-        
+        self.mapView.delegate = self;
         self.view = self.mapView;
     }
 }
@@ -50,6 +53,29 @@
     [self.locationManager start];
 }
 
+-(void)drawMarkers {
+    [self.mapView clear];
+    for(TWTRGeoTweet* tweet in self.tweetResume) {
+        GMSMarker* marker = [GMSMarker markerWithPosition:tweet.location.coordinate];
+        marker.title = tweet.text;
+        marker.snippet = tweet.author.screenName;
+        marker.userData = tweet;
+        marker.map = self.mapView;
+    }
+}
+
+-(UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker
+{
+    TWTRTweet *tweet = marker.userData;
+    TWTRTweetTableViewCell* cell = [[TWTRTweetTableViewCell alloc] init];
+    [cell setBackgroundColor:[UIColor whiteColor]];
+    [cell configureWithTweet:tweet];
+    CGRect frame = cell.frame;
+    frame.size.height = [TWTRTweetTableViewCell heightForTweet:tweet width:frame.size.width];
+    [cell setFrame:frame];
+    return cell;
+}
+
 -(void)locationUpdated:(NSNotification*)notification
 {
     [self.locationManager stop];
@@ -59,7 +85,8 @@
     [self.mapView animateToCameraPosition:[GMSCameraPosition cameraWithTarget:lastLocation.coordinate zoom:14]];
     
     [[LTTwitterHelper sharedInstance] fetchTweetsOnLocation:lastLocation complete:^(NSArray *tweets) {
-        
+        self.tweetResume = tweets;
+        [self drawMarkers];
     } error:^(NSError *error) {
         
     }];
