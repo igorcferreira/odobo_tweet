@@ -47,6 +47,10 @@
 	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need this information for a better experience on the app</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need this information for a better experience on the app</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -68,9 +72,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We need this information for a better experience on the app</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>We need this information for a better experience on the app</string>
 </dict>
 </plist>

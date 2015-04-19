@@ -11,5 +11,6 @@
 
 #define TWITTER_APP_KEY @"q8FFv7IYmo33QqfmbNbBzFJD8"
 #define TWITTER_APP_SECRET @"U7ORm14lWOcxL2b68yVfUpAOycCwS9l0OEygzrmRzqHm1qF1IM"
+#define kGoogleAPI @"AIzaSyDcHrudjgPIbc5tCCCp4gYv4Z1r4FLlzXE"
 
 #endif

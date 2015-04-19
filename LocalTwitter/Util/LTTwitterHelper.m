@@ -11,6 +11,7 @@
 #import <STTwitterAPI.h>
 #import <TwitterKit/TwitterKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "LTTweetResume.h"
 
 @interface LTTwitterHelper()
 
@@ -90,13 +91,16 @@
                                             until:nil
                                           sinceID:nil
                                             maxID:nil
-                                  includeEntities:@(YES)
+                                  includeEntities:@(NO)
                                          callback:nil
                                      successBlock:^(NSDictionary *searchMetadata, NSArray *statuses) {
                                          NSMutableArray* ids = [[NSMutableArray alloc] initWithCapacity:statuses.count];
                                          
                                          for(NSDictionary* status in statuses) {
-                                             [ids addObject:[NSString stringWithFormat:@"%@",[status objectForKey:@"id"]]];
+                                             LTTweetResume* resume = [[LTTweetResume alloc] initWithDictionary:status];
+                                             if(resume.location) {
+                                                 [ids addObject:resume];
+                                             }
                                          }
                                          
                                          if(completeBlock) {

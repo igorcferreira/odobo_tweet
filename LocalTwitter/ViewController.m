@@ -9,10 +9,13 @@
 #import "ViewController.h"
 #import "LTTwitterHelper.h"
 #import "LTLocationManager.h"
+#import "Constants.h"
+#import <GoogleMaps.h>
 
 @interface ViewController()
 
 @property (nonatomic, strong) LTLocationManager* locationManager;
+@property (nonatomic, strong) GMSMapView* mapView;
 
 @end
 
@@ -22,11 +25,21 @@
     [super viewDidLoad];
     [LTTwitterHelper start];
     [self startLocationManager];
+    [self createMapView];
 }
 
 -(void)dealloc {
     [LTLocationManager unRegisterObserver:self forStatus:kLTLocationManagerStatusError];
     [LTLocationManager unRegisterObserver:self forStatus:kLTLocationManagerStatusUpdated];
+}
+
+-(void)createMapView {
+    if(self.mapView == nil) {
+        [GMSServices provideAPIKey:kGoogleAPI];
+        self.mapView = [GMSMapView mapWithFrame:CGRectZero camera:[GMSCameraPosition cameraWithLatitude:0.0 longitude:0.0 zoom:14]];
+        
+        self.view = self.mapView;
+    }
 }
 
 - (void)startLocationManager {
@@ -40,10 +53,15 @@
 -(void)locationUpdated:(NSNotification*)notification
 {
     [self.locationManager stop];
-    [[LTTwitterHelper sharedInstance] fetchTweetsOnLocation:self.locationManager.lastLocation complete:^(NSArray *tweets) {
-        NSLog(@"%@",tweets);
+    
+    CLLocation* lastLocation = self.locationManager.lastLocation;
+    
+    [self.mapView animateToCameraPosition:[GMSCameraPosition cameraWithTarget:lastLocation.coordinate zoom:14]];
+    
+    [[LTTwitterHelper sharedInstance] fetchTweetsOnLocation:lastLocation complete:^(NSArray *tweets) {
+        
     } error:^(NSError *error) {
-        NSLog(@"%@",error);
+        
     }];
 }
 
